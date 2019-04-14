@@ -42,6 +42,11 @@ typedef enum {
 } gpio_pupd_t;
 
 /**
+ * Initialize pins for standard I/O use.
+ */
+void gpio_init(void);
+
+/**
  * Configure mode of GPIO pin.
  *
  * @param gpio      Port of configured GPIO pin.

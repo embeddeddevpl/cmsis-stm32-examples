@@ -37,3 +37,17 @@ void gpio_pin_pupd(GPIO_TypeDef * gpio, uint8_t pin, gpio_pupd_t pupd)
         gpio->ODR &= ~(uint32_t)(1<<pin);
     }
 }
+
+void gpio_init(void)
+{
+    /* Enable clock for GPIO ports */
+    RCC->APB2ENR |= RCC_APB2ENR_IOPAEN | RCC_APB2ENR_IOPCEN;
+
+    /* Led */
+    gpio_pin_mode(GPIOA, 5, gpio_mode_output_PP_10MHz);
+
+    /* Button */
+    gpio_pin_mode(GPIOA, 9, gpio_mode_input_pupd);
+    gpio_pin_pupd(GPIOA, 9, gpio_pupd_pd);
+
+}
