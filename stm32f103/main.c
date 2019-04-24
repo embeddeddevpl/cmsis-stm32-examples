@@ -11,6 +11,8 @@ int main(void)
 {
     gpio_init();
 
+    SysTick_Config(8000000); //TODO: write function with more options
+
     while(1)
     {
         if( !(GPIOA->IDR & (uint32_t)(1<<9)) ) GPIOA->BSRR = GPIO_BSRR_BS5;
@@ -18,4 +20,8 @@ int main(void)
     }
 
     return 0;
+}
+
+void SysTick_Handler(void) {
+//    GPIOA->ODR ^= 1<<5;
 }
