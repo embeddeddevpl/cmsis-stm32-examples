@@ -47,7 +47,23 @@ void gpio_init(void)
     gpio_pin_mode(GPIOA, 5, gpio_mode_output_PP_10MHz);
 
     /* Button */
+    RCC->APB2ENR |= RCC_APB2ENR_AFIOEN;
+
     gpio_pin_mode(GPIOA, 9, gpio_mode_input_pupd);
     gpio_pin_pupd(GPIOA, 9, gpio_pupd_pd);
 
+    AFIO->EXTICR[2] |= AFIO_EXTICR3_EXTI9_PA;
+    EXTI->IMR |= EXTI_IMR_MR9;
+    EXTI->RTSR |= EXTI_RTSR_TR9;
+
+    NVIC_EnableIRQ(EXTI9_5_IRQn);
+
+}
+
+void EXTI9_5_IRQHandler(void)
+{
+    if ( EXTI->PR & EXTI_PR_PR9) {
+        EXTI->PR = EXTI_PR_PR9;
+        GPIOA->ODR ^= 1<<5;
+    }
 }
