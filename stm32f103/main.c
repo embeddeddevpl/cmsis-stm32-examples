@@ -6,6 +6,7 @@
 
 #include "stm32f10x.h"
 #include "gpio/gpio.h"
+#include "uart/uart.h"
 
 /**
  * Initialization of GPIO for LED and Button.
@@ -15,6 +16,7 @@ static void gpio_init(void);
 int main(void)
 {
     gpio_init();
+    uart_init();
 
     while(1)
     {

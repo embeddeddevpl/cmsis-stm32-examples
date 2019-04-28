@@ -429,7 +429,7 @@ static void SetSysClock(void)
 #elif defined SYSCLK_FREQ_56MHz
   SetSysClockTo56();  
 #elif defined SYSCLK_FREQ_72MHz
-  SetSysClockTo72();
+//  SetSysClockTo72();
 #endif
  
  /* If none of the define above is enabled, the HSI is used as System clock
